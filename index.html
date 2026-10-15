@@ -1,0 +1,1927 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI (BTCOC701) MSE 2026-27 — Interactive MCQ Quiz & Q.4 Descriptive Solutions</title>
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --surface: #ffffff;
+      --surface-alt: #f1f5f9;
+      --primary: #1e3a8a;
+      --primary-light: #2563eb;
+      --primary-soft: #dbeafe;
+      --secondary: #0f766e;
+      --secondary-soft: #ccfbf1;
+      --accent: #d97706;
+      --accent-soft: #fef3c7;
+      --success: #15803d;
+      --success-soft: #dcfce7;
+      --danger: #b91c1c;
+      --danger-soft: #fee2e2;
+      --text: #0f172a;
+      --text-muted: #475569;
+      --border: #cbd5e1;
+      --radius: 12px;
+      --shadow: 0 4px 16px rgba(15, 23, 42, 0.06);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding-bottom: 60px;
+    }
+
+    /* Header Banner */
+    header {
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 60%, #1d4ed8 100%);
+      color: #ffffff;
+      padding: 28px 20px;
+      border-bottom: 4px solid #f59e0b;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .header-container {
+      max-width: 1140px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .college-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.14);
+      padding: 5px 14px;
+      border-radius: 999px;
+      font-size: 0.84rem;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+      width: fit-content;
+    }
+
+    header h1 {
+      font-size: 1.75rem;
+      font-weight: 800;
+      line-height: 1.25;
+    }
+
+    .meta-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px 24px;
+      font-size: 0.92rem;
+      color: #e2e8f0;
+      margin-top: 4px;
+    }
+
+    .meta-item strong {
+      color: #fbbf24;
+    }
+
+    /* Main Navigation Tabs */
+    .main-nav {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.05);
+    }
+
+    .nav-inner {
+      max-width: 1140px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 20px;
+      gap: 12px;
+    }
+
+    .tab-buttons {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .tab-btn {
+      border: 1px solid var(--border);
+      background: var(--surface-alt);
+      color: var(--text);
+      padding: 10px 18px;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .tab-btn:hover {
+      border-color: var(--primary-light);
+      color: var(--primary-light);
+    }
+
+    .tab-btn.active {
+      background: var(--primary);
+      color: #ffffff;
+      border-color: var(--primary);
+      box-shadow: 0 2px 8px rgba(30, 58, 138, 0.25);
+    }
+
+    /* Main Content Container */
+    .container {
+      max-width: 1140px;
+      margin: 24px auto 0;
+      padding: 0 20px;
+    }
+
+    .section-view {
+      display: none;
+    }
+
+    .section-view.active {
+      display: block;
+    }
+
+    /* Quiz Dashboard Bar */
+    .quiz-controls {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px 20px;
+      margin-bottom: 20px;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .controls-top {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .co-filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .filter-btn {
+      padding: 7px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--surface-alt);
+      color: var(--text-muted);
+      font-size: 0.86rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .filter-btn.active {
+      background: var(--primary-soft);
+      color: var(--primary);
+      border-color: var(--primary-light);
+      font-weight: 700;
+    }
+
+    .action-btns {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .btn-action {
+      padding: 8px 14px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: #ffffff;
+      color: var(--text);
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .btn-action:hover {
+      background: var(--surface-alt);
+      border-color: #94a3b8;
+    }
+
+    .btn-action.primary {
+      background: var(--secondary);
+      color: #ffffff;
+      border-color: var(--secondary);
+    }
+
+    .btn-action.primary:hover {
+      background: #115e59;
+    }
+
+    /* Scoreboard & Progress */
+    .scoreboard {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 12px;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
+    }
+
+    .stat-box {
+      background: var(--surface-alt);
+      padding: 10px 14px;
+      border-radius: 8px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .stat-label {
+      font-size: 0.76rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-muted);
+      font-weight: 700;
+    }
+
+    .stat-value {
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: var(--primary);
+    }
+
+    .progress-bar-wrap {
+      width: 100%;
+      height: 8px;
+      background: #e2e8f0;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #2563eb, #10b981);
+      width: 0%;
+      transition: width 0.3s ease;
+    }
+
+    /* Question Cards */
+    .mcq-list {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .mcq-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 22px;
+      box-shadow: var(--shadow);
+      transition: border-color 0.2s;
+    }
+
+    .mcq-card.answered-correct {
+      border-left: 6px solid var(--success);
+    }
+
+    .mcq-card.answered-wrong {
+      border-left: 6px solid var(--danger);
+    }
+
+    .mcq-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .badge-group {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .badge {
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 999px;
+      text-transform: uppercase;
+    }
+
+    .badge-co {
+      background: var(--primary-soft);
+      color: var(--primary);
+    }
+
+    .badge-bl {
+      background: var(--accent-soft);
+      color: var(--accent);
+    }
+
+    .badge-mark {
+      background: var(--surface-alt);
+      color: var(--text-muted);
+    }
+
+    .mcq-question {
+      font-size: 1.08rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 16px;
+    }
+
+    .options-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 10px;
+    }
+
+    .option-btn {
+      text-align: left;
+      padding: 12px 14px;
+      border-radius: 8px;
+      border: 1.5px solid var(--border);
+      background: #ffffff;
+      color: var(--text);
+      font-size: 0.95rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .option-btn:hover:not(:disabled) {
+      border-color: var(--primary-light);
+      background: #f8fafc;
+    }
+
+    .opt-letter {
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      background: var(--surface-alt);
+      color: var(--text);
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 0.85rem;
+    }
+
+    .option-btn.correct {
+      background: var(--success-soft);
+      border-color: var(--success);
+      color: #064e3b;
+      font-weight: 700;
+    }
+
+    .option-btn.correct .opt-letter {
+      background: var(--success);
+      color: #ffffff;
+    }
+
+    .option-btn.wrong {
+      background: var(--danger-soft);
+      border-color: var(--danger);
+      color: #7f1d1d;
+    }
+
+    .option-btn.wrong .opt-letter {
+      background: var(--danger);
+      color: #ffffff;
+    }
+
+    /* Explanation Box */
+    .explanation-box {
+      margin-top: 16px;
+      padding: 16px;
+      border-radius: 10px;
+      background: #f8fafc;
+      border: 1px solid #cbd5e1;
+      display: none;
+    }
+
+    .explanation-box.visible {
+      display: block;
+    }
+
+    .exp-title {
+      font-size: 0.88rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      margin-bottom: 6px;
+      color: var(--primary);
+    }
+
+    .exp-en {
+      font-size: 0.94rem;
+      color: var(--text);
+      margin-bottom: 10px;
+    }
+
+    .exp-hinglish {
+      background: var(--accent-soft);
+      border-left: 4px solid var(--accent);
+      padding: 10px 12px;
+      border-radius: 6px;
+      font-size: 0.92rem;
+      color: #78350f;
+    }
+
+    .exp-hinglish strong {
+      color: #92400e;
+    }
+
+    /* Q.4 Descriptive Section Styles */
+    .q4-intro {
+      background: linear-gradient(135deg, #eff6ff 0%, #f0fdfa 100%);
+      border: 1px solid #bfdbfe;
+      border-radius: var(--radius);
+      padding: 20px 24px;
+      margin-bottom: 24px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .q4-nav-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .q4-pill {
+      text-decoration: none;
+      background: #ffffff;
+      color: var(--primary);
+      border: 1px solid #93c5fd;
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      transition: all 0.15s;
+    }
+
+    .q4-pill:hover {
+      background: var(--primary);
+      color: #ffffff;
+    }
+
+    .q4-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+      margin-bottom: 28px;
+      box-shadow: var(--shadow);
+    }
+
+    .q4-card-header {
+      border-bottom: 2px solid var(--surface-alt);
+      padding-bottom: 14px;
+      margin-bottom: 20px;
+    }
+
+    .q4-card-header h2 {
+      font-size: 1.35rem;
+      color: var(--primary);
+      margin-top: 8px;
+    }
+
+    .q4-sub-heading {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: #1e293b;
+      margin: 20px 0 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .q4-sub-heading::before {
+      content: "";
+      display: inline-block;
+      width: 6px;
+      height: 18px;
+      background: var(--primary-light);
+      border-radius: 3px;
+    }
+
+    .q4-card p {
+      margin-bottom: 12px;
+      font-size: 0.97rem;
+    }
+
+    .q4-card ul, .q4-card ol {
+      margin: 0 0 16px 22px;
+      font-size: 0.96rem;
+    }
+
+    .q4-card li {
+      margin-bottom: 8px;
+    }
+
+    /* Diagram Container */
+    .diagram-box {
+      background: #f8fafc;
+      border: 1.5px dashed #94a3b8;
+      border-radius: 12px;
+      padding: 20px;
+      margin: 20px 0;
+      text-align: center;
+      overflow-x: auto;
+    }
+
+    .diagram-caption {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      margin-top: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* Comparison Tables */
+    .comp-table-wrap {
+      overflow-x: auto;
+      margin: 16px 0;
+    }
+
+    .comp-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.94rem;
+    }
+
+    .comp-table th {
+      background: var(--primary);
+      color: #ffffff;
+      text-align: left;
+      padding: 12px 14px;
+      font-weight: 700;
+    }
+
+    .comp-table td {
+      padding: 11px 14px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+
+    .comp-table tr:nth-child(even) td {
+      background: #f8fafc;
+    }
+
+    /* Formula / Logic Block */
+    .logic-block {
+      background: #0f172a;
+      color: #f8fafc;
+      padding: 16px 20px;
+      border-radius: 10px;
+      font-family: 'Consolas', 'Courier New', monospace;
+      font-size: 0.98rem;
+      margin: 12px 0 16px;
+      overflow-x: auto;
+      line-height: 1.7;
+    }
+
+    .logic-block .hl-sym {
+      color: #38bdf8;
+      font-weight: 700;
+    }
+
+    .logic-block .hl-pred {
+      color: #fde047;
+    }
+
+    .logic-block .hl-comment {
+      color: #94a3b8;
+      font-style: italic;
+    }
+
+    /* Hinglish Explanation Callout in Q4 */
+    .hinglish-card {
+      background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+      border: 1.5px solid #f59e0b;
+      border-left: 6px solid #d97706;
+      border-radius: 12px;
+      padding: 18px 22px;
+      margin-top: 22px;
+    }
+
+    .hinglish-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 1.04rem;
+      font-weight: 800;
+      color: #92400e;
+      margin-bottom: 10px;
+    }
+
+    .hinglish-card p, .hinglish-card li {
+      color: #78350f;
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 640px) {
+      header h1 {
+        font-size: 1.35rem;
+      }
+      .q4-card {
+        padding: 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Header -->
+  <header>
+    <div class="header-container">
+      <div class="college-badge">
+        <span>🎓 SSVPS Bapusaheb Shivajirao Deore College of Engineering, Dhule (NAAC Grade B++)</span>
+      </div>
+      <h1>Artificial Intelligence (BTCOC701) — MSE Question Bank 2026-27</h1>
+      <div class="meta-grid">
+        <div class="meta-item"><strong>Department:</strong> Computer Engineering</div>
+        <div class="meta-item"><strong>Class:</strong> L. Y. B. Tech</div>
+        <div class="meta-item"><strong>Sections:</strong> Q.1 (CO-01), Q.2 (CO-02), Q.3 (CO-03) MCQs &amp; Q.4 (CO-03 Descriptive 6M)</div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Sticky Navigation Bar -->
+  <nav class="main-nav">
+    <div class="nav-inner">
+      <div class="tab-buttons">
+        <button class="tab-btn active" onclick="switchTab('mcq-view', this)">
+          📝 Interactive MCQ Quiz (30 Questions)
+        </button>
+        <button class="tab-btn" onclick="switchTab('q4-view', this)">
+          📘 Q.4 Descriptive Answers + Diagrams + Hinglish (6M Each)
+        </button>
+      </div>
+      <div class="action-btns">
+        <button class="btn-action" onclick="window.print()">🖨️ Print / Save PDF</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Container -->
+  <main class="container">
+
+    <!-- ==================== TAB 1: INTERACTIVE MCQ QUIZ ==================== -->
+    <section id="mcq-view" class="section-view active">
+      <div class="quiz-controls">
+        <div class="controls-top">
+          <div class="co-filters">
+            <button class="filter-btn active" onclick="filterMCQs('ALL', this)">All Questions (30)</button>
+            <button class="filter-btn" onclick="filterMCQs('CO-01', this)">Q.1: CO-01 (10)</button>
+            <button class="filter-btn" onclick="filterMCQs('CO-02', this)">Q.2: CO-02 (10)</button>
+            <button class="filter-btn" onclick="filterMCQs('CO-03', this)">Q.3: CO-03 (10)</button>
+          </div>
+          <div class="action-btns">
+            <button class="btn-action primary" id="toggle-all-exp-btn" onclick="toggleAllAnswers()">
+              👁️ Show All Answers &amp; Explanations
+            </button>
+            <button class="btn-action" onclick="resetQuiz()">
+              🔄 Reset Quiz
+            </button>
+          </div>
+        </div>
+
+        <div class="progress-bar-wrap">
+          <div class="progress-bar-fill" id="quiz-progress"></div>
+        </div>
+
+        <div class="scoreboard">
+          <div class="stat-box">
+            <span class="stat-label">Total Questions</span>
+            <span class="stat-value" id="stat-total">30</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-label">Attempted</span>
+            <span class="stat-value" id="stat-attempted">0 / 30</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-label">Correct Answers</span>
+            <span class="stat-value" id="stat-correct" style="color: var(--success);">0</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-label">Accuracy / Score</span>
+            <span class="stat-value" id="stat-accuracy">0%</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dynamic MCQ Container -->
+      <div id="mcq-container" class="mcq-list"></div>
+    </section>
+
+    <!-- ==================== TAB 2: Q.4 DESCRIPTIVE SOLUTIONS ==================== -->
+    <section id="q4-view" class="section-view">
+
+      <div class="q4-intro">
+        <div>
+          <h2 style="color: var(--primary); font-size: 1.3rem;">Q.4 Descriptive Type Questions on CO-03 (6 Marks Each — BL2)</h2>
+          <p style="color: var(--text-muted); font-size: 0.94rem; margin-top: 4px;">
+            Complete exam-ready answers with structured points, SVG technical diagrams, First-Order Logic derivations, and easy <strong>Hinglish explanations</strong> below each topic.
+          </p>
+          <div class="q4-nav-pills">
+            <a href="#q4-1" class="q4-pill">Q4.1 Knowledge Representation &amp; Properties</a>
+            <a href="#q4-2" class="q4-pill">Q4.2 Procedural vs Declarative Knowledge</a>
+            <a href="#q4-3" class="q4-pill">Q4.3 First-Order Logic (FOL) Statements</a>
+            <a href="#q4-4" class="q4-pill">Q4.4 Forward vs Backward Chaining</a>
+            <a href="#q4-5" class="q4-pill">Q4.5 Resolution Method (Proof by Refutation)</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== Q4.1 ==================== -->
+      <article id="q4-1" class="q4-card">
+        <div class="q4-card-header">
+          <div class="badge-group">
+            <span class="badge badge-co">Q.4 (1) • CO-03</span>
+            <span class="badge badge-bl">Bloom's Level: BL2</span>
+            <span class="badge badge-mark">6 Marks</span>
+          </div>
+          <h2>1. What is knowledge representation? Write its four desirable properties.</h2>
+        </div>
+
+        <div class="q4-sub-heading">1. Definition of Knowledge Representation (KR)</div>
+        <p>
+          <strong>Knowledge Representation (KR)</strong> in Artificial Intelligence is the study of how an intelligent agent's beliefs, intentions, and real-world facts can be expressed formally in a symbolic structure so that a computer system can reason with that knowledge to solve complex problems, infer new facts, and make intelligent decisions.
+        </p>
+        <p>
+          Instead of storing raw, disconnected data, a Knowledge Representation and Reasoning (KR&amp;R) system bridges the gap between the <strong>real world</strong> (objects, events, relationships, rules) and <strong>computational symbolic reasoning</strong> via a Knowledge Base (KB) and an Inference Engine.
+        </p>
+
+        <!-- SVG Diagram for Q4.1 -->
+        <div class="diagram-box">
+          <svg viewBox="0 0 820 300" width="100%" style="max-width: 780px; height: auto;" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="arrow1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path d="M 0 1 L 10 5 L 0 9 z" fill="#1e3a8a"/>
+              </marker>
+            </defs>
+            <!-- Background Box for AI Agent -->
+            <rect x="200" y="15" width="420" height="270" rx="14" fill="#eff6ff" stroke="#2563eb" stroke-width="2" stroke-dasharray="6,4"/>
+            <text x="410" y="38" text-anchor="middle" font-family="sans-serif" font-size="14" font-weight="bold" fill="#1e3a8a">AI KNOWLEDGE-BASED AGENT ARCHITECTURE</text>
+
+            <!-- Real World Left -->
+            <rect x="20" y="95" width="130" height="110" rx="10" fill="#dcfce7" stroke="#15803d" stroke-width="2"/>
+            <text x="85" y="138" text-anchor="middle" font-family="sans-serif" font-size="14" font-weight="bold" fill="#065f46">Real World</text>
+            <text x="85" y="158" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#065f46">(Facts, Objects,</text>
+            <text x="85" y="174" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#065f46">Events, Rules)</text>
+
+            <!-- Knowledge Base Box -->
+            <rect x="240" y="60" width="340" height="80" rx="10" fill="#ffffff" stroke="#1e3a8a" stroke-width="2"/>
+            <text x="410" y="88" text-anchor="middle" font-family="sans-serif" font-size="14" font-weight="bold" fill="#1e3a8a">Knowledge Base (KB)</text>
+            <text x="410" y="108" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#334155">Symbolic Representation (Logic, Semantic Nets,</text>
+            <text x="410" y="124" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#334155">Frames, Production Rules)</text>
+
+            <!-- Inference Engine Box -->
+            <rect x="240" y="180" width="340" height="80" rx="10" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+            <text x="410" y="208" text-anchor="middle" font-family="sans-serif" font-size="14" font-weight="bold" fill="#92400e">Inference Engine (Reasoning)</text>
+            <text x="410" y="228" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#78350f">Derives New Conclusions &amp; Decisions</text>
+            <text x="410" y="244" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#78350f">(Forward/Backward Chaining, Resolution)</text>
+
+            <!-- Intelligent Action Right -->
+            <rect x="670" y="95" width="130" height="110" rx="10" fill="#ede9fe" stroke="#6d28d9" stroke-width="2"/>
+            <text x="735" y="138" text-anchor="middle" font-family="sans-serif" font-size="14" font-weight="bold" fill="#4c1d95">Intelligent</text>
+            <text x="735" y="156" text-anchor="middle" font-family="sans-serif" font-size="14" font-weight="bold" fill="#4c1d95">Output / Action</text>
+            <text x="735" y="176" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#4c1d95">(Decisions &amp; Answers)</text>
+
+            <!-- Arrows -->
+            <line x1="150" y1="125" x2="235" y2="105" stroke="#1e3a8a" stroke-width="2.2" marker-end="url(#arrow1)"/>
+            <text x="190" y="102" text-anchor="middle" font-family="sans-serif" font-size="11" font-weight="bold" fill="#1e3a8a">Sensors / Input</text>
+
+            <line x1="370" y1="140" x2="370" y2="176" stroke="#1e3a8a" stroke-width="2.2" marker-end="url(#arrow1)"/>
+            <line x1="450" y1="180" x2="450" y2="144" stroke="#1e3a8a" stroke-width="2.2" marker-end="url(#arrow1)"/>
+            <text x="515" y="165" text-anchor="middle" font-family="sans-serif" font-size="11" font-weight="bold" fill="#1e3a8a">Query &amp; Update</text>
+
+            <line x1="580" y1="215" x2="665" y2="165" stroke="#1e3a8a" stroke-width="2.2" marker-end="url(#arrow1)"/>
+            <text x="630" y="208" text-anchor="middle" font-family="sans-serif" font-size="11" font-weight="bold" fill="#1e3a8a">Actuators</text>
+          </svg>
+          <div class="diagram-caption">Figure 4.1: Architecture of a Knowledge Representation &amp; Reasoning (KR&amp;R) System</div>
+        </div>
+
+        <div class="q4-sub-heading">2. Four Desirable Properties of a Good Knowledge Representation System</div>
+        <p>According to Rich &amp; Knight's foundational AI framework, a good Knowledge Representation system must possess the following <strong>four desirable properties</strong>:</p>
+        <ol>
+          <li>
+            <strong>Representational Adequacy:</strong>
+            It is the ability to represent all kinds of knowledge that are needed in a specific domain (such as static facts, rules, default assumptions, uncertainty, and meta-knowledge).
+          </li>
+          <li>
+            <strong>Inferential Adequacy:</strong>
+            It is the ability to manipulate the represented structures in such a way as to derive (infer) new structures corresponding to new knowledge inferred from old knowledge.
+          </li>
+          <li>
+            <strong>Inferential Efficiency:</strong>
+            It is the ability to incorporate additional guidance or heuristic information into the knowledge structure that can focus the inference mechanisms in the most promising directions, avoiding exponential search delays.
+          </li>
+          <li>
+            <strong>Acquisitional Efficiency:</strong>
+            It is the ability to acquire new information easily—either by direct insertion from human experts or automatically through machine learning modules—without breaking existing knowledge.
+          </li>
+        </ol>
+
+        <!-- Hinglish Explanation -->
+        <div class="hinglish-card">
+          <div class="hinglish-header">💡 Hinglish Mein Samjho (Concept + Diagram Explanation)</div>
+          <p>
+            <strong>Knowledge Representation (KR) kya hai?</strong><br/>
+            Simple words mein, computer khud se duniya ko insaan jaise nahi samajh sakta. Isliye real world ke facts, objects aur rules ko <strong>symbols, logic ya graphs</strong> ke form mein computer ke <strong>Knowledge Base (KB)</strong> mein store karne ke tarike ko <em>Knowledge Representation</em> kehte hain.
+          </p>
+          <p style="margin-top: 8px;">
+            <strong>Diagram Explanation:</strong> Diagram mein dekho — Left side par <em>Real World</em> hai jahan se facts sensors ke through aate hain. Beech mein AI Agent ke 2 main parts hain:
+            (1) <strong>Knowledge Base (KB)</strong> jahan knowledge store hoti hai, aur
+            (2) <strong>Inference Engine</strong> jo purane facts par dimaag laga kar (reasoning karke) naye conclusions nikalta hai aur Right side par <em>Intelligent Action</em> leta hai.
+          </p>
+          <p style="margin-top: 8px;"><strong>4 Desirable Properties yaad rakhne ki trick (R-I-I-A):</strong></p>
+          <ul>
+            <li><strong>1. Representational Adequacy:</strong> System mein har type ki zaroori knowledge ko store karne ki shamta (capacity) honi chahiye.</li>
+            <li><strong>2. Inferential Adequacy:</strong> Purane facts se naye facts (conclusions) deduce karne ki power honi chahiye.</li>
+            <li><strong>3. Inferential Efficiency:</strong> Sirf conclusion nikalna kaafi nahi hai, sahi direction mein <em>fast aur efficiently</em> reasoning honi chahiye (time waste nahi hona chahiye).</li>
+            <li><strong>4. Acquisitional Efficiency:</strong> Naya data ya knowledge system mein easily aur automatically add (acquire) kiya ja sake.</li>
+          </ul>
+        </div>
+      </article>
+
+      <!-- ==================== Q4.2 ==================== -->
+      <article id="q4-2" class="q4-card">
+        <div class="q4-card-header">
+          <div class="badge-group">
+            <span class="badge badge-co">Q.4 (2) • CO-03</span>
+            <span class="badge badge-bl">Bloom's Level: BL2</span>
+            <span class="badge badge-mark">6 Marks</span>
+          </div>
+          <h2>2. Differentiate between procedural knowledge and declarative knowledge.</h2>
+        </div>
+
+        <div class="q4-sub-heading">1. Conceptual Overview &amp; Diagram</div>
+        <p>
+          In Artificial Intelligence, knowledge stored in an intelligent system is broadly classified into <strong>Declarative Knowledge</strong> (knowing <em>"what"</em> is true) and <strong>Procedural Knowledge</strong> (knowing <em>"how"</em> to perform a task).
+        </p>
+
+        <!-- SVG Diagram for Q4.2 -->
+        <div class="diagram-box">
+          <svg viewBox="0 0 800 260" width="100%" style="max-width: 760px; height: auto;" xmlns="http://www.w3.org/2000/svg">
+            <!-- Root Node -->
+            <rect x="275" y="12" width="250" height="44" rx="8" fill="#1e3a8a" stroke="#0f172a" stroke-width="2"/>
+            <text x="400" y="39" text-anchor="middle" font-family="sans-serif" font-size="14" font-weight="bold" fill="#ffffff">TYPES OF KNOWLEDGE IN AI</text>
+
+            <!-- Connectors -->
+            <line x1="400" y1="56" x2="400" y2="80" stroke="#334155" stroke-width="2"/>
+            <line x1="190" y1="80" x2="610" y2="80" stroke="#334155" stroke-width="2"/>
+            <line x1="190" y1="80" x2="190" y2="104" stroke="#334155" stroke-width="2"/>
+            <line x1="610" y1="80" x2="610" y2="104" stroke="#334155" stroke-width="2"/>
+
+            <!-- Left Card: Declarative -->
+            <rect x="30" y="104" width="320" height="140" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+            <text x="190" y="130" text-anchor="middle" font-family="sans-serif" font-size="15" font-weight="bold" fill="#1e3a8a">Declarative Knowledge ("WHAT")</text>
+            <text x="190" y="154" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#1e293b">• Static facts, concepts, assertions</text>
+            <text x="190" y="176" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#1e293b">• Easy to modify, validate &amp; share</text>
+            <text x="190" y="198" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#1e293b">• Example: "Snow is white", "Delhi is capital"</text>
+            <text x="190" y="222" text-anchor="middle" font-family="sans-serif" font-size="11" font-weight="bold" fill="#2563eb">Represented via: Logic (FOL), Semantic Nets</text>
+
+            <!-- Right Card: Procedural -->
+            <rect x="450" y="104" width="320" height="140" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+            <text x="610" y="130" text-anchor="middle" font-family="sans-serif" font-size="15" font-weight="bold" fill="#15803d">Procedural Knowledge ("HOW")</text>
+            <text x="610" y="154" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#1e293b">• Step-by-step actions, rules &amp; algorithms</text>
+            <text x="610" y="176" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#1e293b">• Fast execution, harder to modify</text>
+            <text x="610" y="198" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#1e293b">• Example: QuickSort algorithm, driving a car</text>
+            <text x="610" y="222" text-anchor="middle" font-family="sans-serif" font-size="11" font-weight="bold" fill="#15803d">Represented via: Production Rules, Programs</text>
+          </svg>
+          <div class="diagram-caption">Figure 4.2: Classification and Characteristics of Declarative vs. Procedural Knowledge</div>
+        </div>
+
+        <div class="q4-sub-heading">2. Point-by-Point Comparison Table (6 Marks)</div>
+        <div class="comp-table-wrap">
+          <table class="comp-table">
+            <thead>
+              <tr>
+                <th style="width: 18%;">Parameter</th>
+                <th style="width: 41%;">Declarative Knowledge</th>
+                <th style="width: 41%;">Procedural Knowledge</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>1. Core Meaning</strong></td>
+                <td>Represents <strong>"What is true"</strong> — passive facts, assertions, concepts, and relationships about the world.</td>
+                <td>Represents <strong>"How to do something"</strong> — step-by-step instructions, operational procedures, and control strategies.</td>
+              </tr>
+              <tr>
+                <td><strong>2. Mode of Representation</strong></td>
+                <td>Expressed using declarative statements in Propositional Logic, First-Order Logic (FOL), Semantic Networks, or Frames.</td>
+                <td>Expressed using IF-THEN production rules, subroutines, finite-state procedures, or imperative code.</td>
+              </tr>
+              <tr>
+                <td><strong>3. Ease of Modification</strong></td>
+                <td><strong>High (Modular):</strong> Individual facts can be added, updated, or deleted independently without breaking other facts.</td>
+                <td><strong>Low (Tightly Coupled):</strong> Changing a step inside an algorithm or procedure can affect the entire execution flow.</td>
+              </tr>
+              <tr>
+                <td><strong>4. Execution Efficiency</strong></td>
+                <td><strong>Slower:</strong> Requires a general-purpose inference engine to search and combine facts at runtime.</td>
+                <td><strong>Faster:</strong> Directly executes pre-compiled steps or domain-specific heuristics without heavy search overhead.</td>
+              </tr>
+              <tr>
+                <td><strong>5. Explanation &amp; Debugging</strong></td>
+                <td>Easy to inspect, verify, and explain explicitly to human users.</td>
+                <td>Harder to inspect or explain because control flow is embedded inside code/rules.</td>
+              </tr>
+              <tr>
+                <td><strong>6. Classic Examples</strong></td>
+                <td><em>"Snow is white"</em>, <em>"Dog ISA Mammal"</em>, or a database table of cities and distances.</td>
+                <td>A sorting algorithm (e.g., Merge Sort), how to solve a Rubik's cube, or how to ride a bicycle.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Hinglish Explanation -->
+        <div class="hinglish-card">
+          <div class="hinglish-header">💡 Hinglish Mein Samjho (Easy Difference)</div>
+          <p>
+            <strong>Declarative vs Procedural Knowledge ka farq ek line mein samjho:</strong>
+          </p>
+          <ul>
+            <li>
+              <strong>Declarative Knowledge ("KYA HAI / WHAT"):</strong> Yeh sirf <em>facts aur information</em> batati hai. Jaise <em>"Snow is white"</em> ya <em>"2 + 2 = 4"</em>. Ismein yeh nahi likha hota ki kaam kaise karna hai, bas sachai (statement) store hoti hai. Isko edit ya update karna bahut easy hota hai.
+            </li>
+            <li>
+              <strong>Procedural Knowledge ("KAISE KARNA HAI / HOW"):</strong> Yeh किसी task ko perform karne ka <em>step-by-step tarika (algorithm/process)</em> batati hai. Jaise <em>"Array ko sort kaise karein (Sorting Algorithm)"</em> ya <em>"Chai banane ki recipe"</em>. Yeh execute hone mein fast hoti hai kyunki steps fix hote hain, par beech mein modify karna thoda mushkil hota hai.
+            </li>
+          </ul>
+        </div>
+      </article>
+
+      <!-- ==================== Q4.3 ==================== -->
+      <article id="q4-3" class="q4-card">
+        <div class="q4-card-header">
+          <div class="badge-group">
+            <span class="badge badge-co">Q.4 (3) • CO-03</span>
+            <span class="badge badge-bl">Bloom's Level: BL2</span>
+            <span class="badge badge-mark">6 Marks</span>
+          </div>
+          <h2>3. Represent the following statements in First-Order Logic: (a) All humans are mortal. (b) Some cats can fly.</h2>
+        </div>
+
+        <div class="q4-sub-heading">1. Introduction to First-Order Logic (FOL) Translation</div>
+        <p>
+          <strong>First-Order Logic (FOL)</strong> (also known as Predicate Logic) extends Propositional Logic by introducing <strong>objects, variables (x, y), predicates (properties/relations), and quantifiers</strong>:
+        </p>
+        <ul>
+          <li><strong>Universal Quantifier (∀x):</strong> Means <em>"For all x"</em> or <em>"Every x"</em>. Almost always paired with the <strong>implication connective (→)</strong>.</li>
+          <li><strong>Existential Quantifier (∃x):</strong> Means <em>"There exists at least one x"</em> or <em>"For some x"</em>. Almost always paired with the <strong>conjunction connective (∧)</strong>.</li>
+        </ul>
+
+        <div class="q4-sub-heading">2. Statement (a): "All humans are mortal." (3 Marks)</div>
+        <p><strong>Step 1 — Identify Predicates:</strong></p>
+        <ul>
+          <li>Let <code>Human(x)</code> be the predicate meaning: <em>"x is a human."</em></li>
+          <li>Let <code>Mortal(x)</code> be the predicate meaning: <em>"x is mortal."</em></li>
+        </ul>
+        <p><strong>Step 2 — Identify Quantifier &amp; Logical Connective:</strong></p>
+        <ul>
+          <li>The keyword <strong>"All"</strong> requires the <strong>Universal Quantifier (∀x)</strong>.</li>
+          <li>In English, "All humans are mortal" means: <em>"For every object x in the universe of discourse, IF x is a human, THEN x is mortal."</em></li>
+        </ul>
+        <p><strong>Step 3 — Final First-Order Logic Representation:</strong></p>
+        <div class="logic-block">
+          <span class="hl-sym">∀x</span> [ <span class="hl-pred">Human(x)</span> <span class="hl-sym">→</span> <span class="hl-pred">Mortal(x)</span> ]
+          <br/><span class="hl-comment">// Read as: "For all x, if x is a Human, then x is Mortal."</span>
+        </div>
+
+        <div class="q4-sub-heading">3. Statement (b): "Some cats can fly." (3 Marks)</div>
+        <p><strong>Step 1 — Identify Predicates:</strong></p>
+        <ul>
+          <li>Let <code>Cat(x)</code> be the predicate meaning: <em>"x is a cat."</em></li>
+          <li>Let <code>CanFly(x)</code> (or <code>Fly(x)</code>) be the predicate meaning: <em>"x can fly."</em></li>
+        </ul>
+        <p><strong>Step 2 — Identify Quantifier &amp; Logical Connective:</strong></p>
+        <ul>
+          <li>The keyword <strong>"Some"</strong> requires the <strong>Existential Quantifier (∃x)</strong>.</li>
+          <li>In English, "Some cats can fly" means: <em>"There exists at least one object x such that x is a cat AND x can fly."</em></li>
+        </ul>
+        <p><strong>Step 3 — Final First-Order Logic Representation:</strong></p>
+        <div class="logic-block">
+          <span class="hl-sym">∃x</span> [ <span class="hl-pred">Cat(x)</span> <span class="hl-sym">∧</span> <span class="hl-pred">CanFly(x)</span> ]
+          <br/><span class="hl-comment">// Read as: "There exists some x such that x is a Cat AND x can Fly."</span>
+        </div>
+
+        <!-- SVG Diagram for Q4.3 -->
+        <div class="diagram-box">
+          <svg viewBox="0 0 780 240" width="100%" style="max-width: 740px; height: auto;" xmlns="http://www.w3.org/2000/svg">
+            <!-- Left Panel: All humans are mortal -->
+            <rect x="20" y="15" width="350" height="210" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+            <text x="195" y="40" text-anchor="middle" font-family="sans-serif" font-size="14" font-weight="bold" fill="#1e3a8a">(a) ∀x [ Human(x) → Mortal(x) ]</text>
+            <!-- Outer circle Mortal -->
+            <ellipse cx="195" cy="130" rx="125" ry="70" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+            <text x="195" y="82" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#1e40af">Mortal(x)</text>
+            <!-- Inner circle Human -->
+            <ellipse cx="195" cy="142" rx="68" ry="40" fill="#93c5fd" stroke="#1e3a8a" stroke-width="2"/>
+            <text x="195" y="147" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#0f172a">Human(x)</text>
+            <text x="195" y="215" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#475569">Every Human(x) lies completely inside Mortal(x)</text>
+
+            <!-- Right Panel: Some cats can fly -->
+            <rect x="410" y="15" width="350" height="210" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+            <text x="585" y="40" text-anchor="middle" font-family="sans-serif" font-size="14" font-weight="bold" fill="#15803d">(b) ∃x [ Cat(x) ∧ CanFly(x) ]</text>
+            <!-- Left circle Cat -->
+            <circle cx="535" cy="130" r="60" fill="#dcfce7" fill-opacity="0.7" stroke="#16a34a" stroke-width="2"/>
+            <text x="500" y="134" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#14532d">Cat(x)</text>
+            <!-- Right circle CanFly -->
+            <circle cx="635" cy="130" r="60" fill="#fef3c7" fill-opacity="0.7" stroke="#d97706" stroke-width="2"/>
+            <text x="670" y="134" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#78350f">CanFly(x)</text>
+            <!-- Intersection x -->
+            <text x="585" y="134" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#b91c1c">∃x</text>
+            <text x="585" y="215" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#475569">Non-empty intersection where x is both Cat &amp; CanFly</text>
+          </svg>
+          <div class="diagram-caption">Figure 4.3: Set-Theoretic / Venn Diagram Interpretation of Universal (∀) vs. Existential (∃) FOL Statements</div>
+        </div>
+
+        <!-- Hinglish Explanation -->
+        <div class="hinglish-card">
+          <div class="hinglish-header">💡 Hinglish Mein Samjho (FOL Golden Rule)</div>
+          <p>
+            <strong>Exam mein FOL likhne ka sabse important Golden Rule yaad rakho:</strong>
+          </p>
+          <ul>
+            <li>
+              <strong>Rule 1 — "All / Every" (∀ ke saath hamesha → lagta hai):</strong><br/>
+              Jab sentence mein <em>"All humans are mortal"</em> bola hai, toh hum bol rahe hain: Duniya mein koi bhi <code>x</code> utha lo (<code>∀x</code>), <strong>AGAR</strong> woh <code>Human(x)</code> hai, <strong>TOH (→)</strong> woh pakka <code>Mortal(x)</code> hoga. Isliye answer hai: <code>∀x (Human(x) → Mortal(x))</code>.
+            </li>
+            <li>
+              <strong>Rule 2 — "Some / At least one" (∃ ke saath hamesha ∧ [AND] lagta hai):</strong><br/>
+              Jab sentence mein <em>"Some cats can fly"</em> bola hai, toh iska matlab hai: Kam se kam ek aisa <code>x</code> exist karta hai (<code>∃x</code>) jo <code>Cat(x)</code> <strong>BHI HAI AUR (∧)</strong> <code>CanFly(x)</code> <strong>BHI HAI</strong>. Isliye answer hai: <code>∃x (Cat(x) ∧ CanFly(x))</code>.
+            </li>
+          </ul>
+        </div>
+      </article>
+
+      <!-- ==================== Q4.4 ==================== -->
+      <article id="q4-4" class="q4-card">
+        <div class="q4-card-header">
+          <div class="badge-group">
+            <span class="badge badge-co">Q.4 (4) • CO-03</span>
+            <span class="badge badge-bl">Bloom's Level: BL2</span>
+            <span class="badge badge-mark">6 Marks</span>
+          </div>
+          <h2>4. Differentiate between forward chaining and backward chaining.</h2>
+        </div>
+
+        <div class="q4-sub-heading">1. Overview of Rule-Based Inference</div>
+        <p>
+          In an AI Inference Engine using Horn Clauses / IF-THEN production rules, there are two primary reasoning strategies to prove a conclusion from a Knowledge Base:
+          <strong>Forward Chaining (Data-Driven Reasoning)</strong> and <strong>Backward Chaining (Goal-Driven Reasoning)</strong>.
+        </p>
+
+        <!-- SVG Diagram for Q4.4 -->
+        <div class="diagram-box">
+          <svg viewBox="0 0 820 270" width="100%" style="max-width: 780px; height: auto;" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="arrowFC" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                <path d="M 0 1 L 10 5 L 0 9 z" fill="#15803d"/>
+              </marker>
+              <marker id="arrowBC" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                <path d="M 0 1 L 10 5 L 0 9 z" fill="#b91c1c"/>
+              </marker>
+            </defs>
+
+            <!-- Forward Chaining Top Track -->
+            <rect x="20" y="20" width="780" height="105" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5"/>
+            <text x="40" y="45" font-family="sans-serif" font-size="14" font-weight="bold" fill="#15803d">1. FORWARD CHAINING (Data-Driven / Bottom-Up: Starts from Known Facts → Goal)</text>
+
+            <rect x="40" y="60" width="160" height="48" rx="8" fill="#dcfce7" stroke="#15803d" stroke-width="2"/>
+            <text x="120" y="89" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#065f46">Known Facts (A, B)</text>
+
+            <line x1="200" y1="84" x2="310" y2="84" stroke="#15803d" stroke-width="2.5" marker-end="url(#arrowFC)"/>
+            <text x="255" y="75" text-anchor="middle" font-family="sans-serif" font-size="11" font-weight="bold" fill="#15803d">Match IF part</text>
+
+            <rect x="315" y="60" width="190" height="48" rx="8" fill="#ffffff" stroke="#15803d" stroke-width="2"/>
+            <text x="410" y="89" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#065f46">Fire Rules (A∧B → C)</text>
+
+            <line x1="505" y1="84" x2="615" y2="84" stroke="#15803d" stroke-width="2.5" marker-end="url(#arrowFC)"/>
+            <text x="560" y="75" text-anchor="middle" font-family="sans-serif" font-size="11" font-weight="bold" fill="#15803d">Infer New Facts</text>
+
+            <rect x="620" y="60" width="160" height="48" rx="8" fill="#15803d" stroke="#065f46" stroke-width="2"/>
+            <text x="700" y="89" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#ffffff">Goal Reached (Z)</text>
+
+            <!-- Backward Chaining Bottom Track -->
+            <rect x="20" y="145" width="780" height="105" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="1.5"/>
+            <text x="40" y="170" font-family="sans-serif" font-size="14" font-weight="bold" fill="#b91c1c">2. BACKWARD CHAINING (Goal-Driven / Top-Down: Starts from Goal → Known Facts)</text>
+
+            <rect x="40" y="185" width="160" height="48" rx="8" fill="#fee2e2" stroke="#b91c1c" stroke-width="2"/>
+            <text x="120" y="214" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#7f1d1d">Verify in KB (A, B)</text>
+
+            <line x1="315" y1="209" x2="205" y2="209" stroke="#b91c1c" stroke-width="2.5" marker-end="url(#arrowBC)"/>
+            <text x="260" y="200" text-anchor="middle" font-family="sans-serif" font-size="11" font-weight="bold" fill="#b91c1c">Reduce to Sub-goals</text>
+
+            <rect x="315" y="185" width="190" height="48" rx="8" fill="#ffffff" stroke="#b91c1c" stroke-width="2"/>
+            <text x="410" y="214" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#7f1d1d">Find Rule (C → Z)</text>
+
+            <line x1="620" y1="209" x2="510" y2="209" stroke="#b91c1c" stroke-width="2.5" marker-end="url(#arrowBC)"/>
+            <text x="565" y="200" text-anchor="middle" font-family="sans-serif" font-size="11" font-weight="bold" fill="#b91c1c">Match THEN part</text>
+
+            <rect x="620" y="185" width="160" height="48" rx="8" fill="#b91c1c" stroke="#7f1d1d" stroke-width="2"/>
+            <text x="700" y="214" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#ffffff">Start at Goal (Z?)</text>
+          </svg>
+          <div class="diagram-caption">Figure 4.4: Directional Flow of Forward Chaining (Facts → Goal) vs. Backward Chaining (Goal → Facts)</div>
+        </div>
+
+        <div class="q4-sub-heading">2. Detailed Comparison Table (6 Marks)</div>
+        <div class="comp-table-wrap">
+          <table class="comp-table">
+            <thead>
+              <tr>
+                <th style="width: 18%;">Parameter</th>
+                <th style="width: 41%;">Forward Chaining</th>
+                <th style="width: 41%;">Backward Chaining</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>1. Starting Point</strong></td>
+                <td>Starts from the <strong>known initial facts</strong> in the Knowledge Base and works forward toward a conclusion/goal.</td>
+                <td>Starts from the <strong>target goal (hypothesis)</strong> and works backward to check if supporting facts exist in the KB.</td>
+              </tr>
+              <tr>
+                <td><strong>2. Reasoning Approach</strong></td>
+                <td><strong>Data-Driven</strong> (Bottom-Up reasoning).</td>
+                <td><strong>Goal-Driven</strong> (Top-Down reasoning).</td>
+              </tr>
+              <tr>
+                <td><strong>3. Rule Matching</strong></td>
+                <td>Matches facts against the <strong>left-hand side (IF / antecedent)</strong> of rules and adds the right-hand side to the KB.</td>
+                <td>Matches the goal against the <strong>right-hand side (THEN / consequent)</strong> of rules and sets the IF-conditions as new sub-goals.</td>
+              </tr>
+              <tr>
+                <td><strong>4. Search Strategy</strong></td>
+                <td>Typically uses <strong>Breadth-First Search (BFS)</strong> exploration across all applicable rules.</td>
+                <td>Typically uses <strong>Depth-First Search (DFS)</strong> to resolve sub-goals recursively.</td>
+              </tr>
+              <tr>
+                <td><strong>5. Number of Inferences</strong></td>
+                <td>May generate many irrelevant facts/conclusions that are not related to a specific query.</td>
+                <td>Highly focused; only evaluates rules that are directly relevant to proving the requested goal.</td>
+              </tr>
+              <tr>
+                <td><strong>6. Typical Applications</strong></td>
+                <td>Planning, process monitoring, control systems, and production expert systems (e.g., CLIPS, OPS5).</td>
+                <td>Medical diagnosis (e.g., MYCIN), troubleshooting, theorem proving, and Prolog queries.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Hinglish Explanation -->
+        <div class="hinglish-card">
+          <div class="hinglish-header">💡 Hinglish Mein Samjho (Forward vs Backward Chaining)</div>
+          <p>
+            <strong>Real-life detective ya doctor ke example se samjho:</strong>
+          </p>
+          <ul>
+            <li>
+              <strong>Forward Chaining (Facts → Goal | Data-Driven):</strong><br/>
+              Yahan hum <strong>Known Facts</strong> se shuru karte hain. Maan lo aapko pata hai: <em>"Patient ko fever hai (Fact A)"</em> aur <em>"Body ache hai (Fact B)"</em>. Ab aap rules apply karke aage badhte ho ki in facts se kya-kya naye conclusions nikal sakte hain jab tak final disease (Goal) na mil jaye. Isko <strong>Bottom-Up / Data-Driven</strong> kehte hain.
+            </li>
+            <li>
+              <strong>Backward Chaining (Goal → Facts | Goal-Driven):</strong><br/>
+              Yahan hum seedha <strong>Goal (Hypothesis)</strong> se ulta shuru karte hain. Maan lo doctor ko shak hai: <em>"Kya patient ko Malaria hai? (Goal Z)"</em>. Ab doctor peeche check karega ki Malaria hone ke liye kaunse symptoms (sub-goals) chahiye, aur phir verify karega ki kya woh symptoms patient (Known Facts) mein maujood hain ya nahi. Isko <strong>Top-Down / Goal-Driven</strong> kehte hain.
+            </li>
+          </ul>
+        </div>
+      </article>
+
+      <!-- ==================== Q4.5 ==================== -->
+      <article id="q4-5" class="q4-card">
+        <div class="q4-card-header">
+          <div class="badge-group">
+            <span class="badge badge-co">Q.4 (5) • CO-03</span>
+            <span class="badge badge-bl">Bloom's Level: BL2</span>
+            <span class="badge badge-mark">6 Marks</span>
+          </div>
+          <h2>5. Write the steps of the resolution method (proof by refutation).</h2>
+        </div>
+
+        <div class="q4-sub-heading">1. Principle of Resolution (Proof by Refutation / Contradiction)</div>
+        <p>
+          <strong>Resolution</strong> (introduced by J. Alan Robinson in 1965) is a complete inference procedure used in Propositional Logic and First-Order Logic. It works on the principle of <strong>Proof by Refutation (Proof by Contradiction)</strong>:
+          To prove that a goal statement <strong>G</strong> follows from a Knowledge Base (KB), we assume the <strong>negation of the goal (¬G)</strong> is true, add it to the KB, and repeatedly resolve clauses with complementary literals until we derive the <strong>Empty Clause (□ or NIL / False)</strong>, which proves a contradiction and confirms that <strong>G is true</strong>.
+        </p>
+
+        <!-- SVG Diagram for Q4.5 -->
+        <div class="diagram-box">
+          <svg viewBox="0 0 820 320" width="100%" style="max-width: 780px; height: auto;" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="arrowRes" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                <path d="M 0 1 L 10 5 L 0 9 z" fill="#1e3a8a"/>
+              </marker>
+            </defs>
+
+            <!-- Left Column: Steps Flowchart -->
+            <text x="210" y="26" text-anchor="middle" font-family="sans-serif" font-size="14" font-weight="bold" fill="#1e3a8a">RESOLUTION PIPELINE (STEPS)</text>
+
+            <rect x="40" y="40" width="340" height="40" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="1.8"/>
+            <text x="210" y="65" text-anchor="middle" font-family="sans-serif" font-size="12" font-weight="bold" fill="#1e3a8a">Step 1: Convert all KB statements into CNF Clauses</text>
+            <line x1="210" y1="80" x2="210" y2="98" stroke="#1e3a8a" stroke-width="2" marker-end="url(#arrowRes)"/>
+
+            <rect x="40" y="100" width="340" height="40" rx="8" fill="#fef3c7" stroke="#d97706" stroke-width="1.8"/>
+            <text x="210" y="125" text-anchor="middle" font-family="sans-serif" font-size="12" font-weight="bold" fill="#92400e">Step 2: Negate the Goal (¬G) &amp; add to KB</text>
+            <line x1="210" y1="140" x2="210" y2="158" stroke="#1e3a8a" stroke-width="2" marker-end="url(#arrowRes)"/>
+
+            <rect x="40" y="160" width="340" height="40" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="1.8"/>
+            <text x="210" y="185" text-anchor="middle" font-family="sans-serif" font-size="12" font-weight="bold" fill="#1e3a8a">Step 3: Resolve pairs with complementary literals</text>
+            <line x1="210" y1="200" x2="210" y2="218" stroke="#1e3a8a" stroke-width="2" marker-end="url(#arrowRes)"/>
+
+            <rect x="40" y="220" width="340" height="46" rx="8" fill="#dcfce7" stroke="#15803d" stroke-width="2"/>
+            <text x="210" y="242" text-anchor="middle" font-family="sans-serif" font-size="12" font-weight="bold" fill="#065f46">Step 4: Derive Empty Clause (□ / NIL)</text>
+            <text x="210" y="258" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#065f46">Contradiction Found ⇒ Original Goal G is PROVED!</text>
+
+            <!-- Right Column: Resolution Tree Example -->
+            <rect x="420" y="20" width="375" height="275" rx="12" fill="#ffffff" stroke="#94a3b8" stroke-width="1.5"/>
+            <text x="607" y="44" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#0f172a">RESOLUTION TREE EXAMPLE (Prove Q)</text>
+
+            <!-- Clause 1: ¬P ∨ Q -->
+            <rect x="440" y="65" width="115" height="36" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="1.8"/>
+            <text x="497" y="88" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#1e3a8a">¬P ∨ Q</text>
+
+            <!-- Clause 2: P -->
+            <rect x="580" y="65" width="85" height="36" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="1.8"/>
+            <text x="622" y="88" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#1e3a8a">P</text>
+
+            <!-- Lines to Resolvent Q -->
+            <line x1="497" y1="101" x2="555" y2="145" stroke="#334155" stroke-width="2"/>
+            <line x1="622" y1="101" x2="565" y2="145" stroke="#334155" stroke-width="2"/>
+
+            <!-- Resolvent: Q -->
+            <rect x="515" y="145" width="90" height="36" rx="6" fill="#e0e7ff" stroke="#4338ca" stroke-width="1.8"/>
+            <text x="560" y="168" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#312e81">Q</text>
+
+            <!-- Negated Goal: ¬Q -->
+            <rect x="655" y="145" width="110" height="36" rx="6" fill="#fee2e2" stroke="#dc2626" stroke-width="1.8"/>
+            <text x="710" y="168" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#991b1b">¬Q (Neg. Goal)</text>
+
+            <!-- Lines to Empty Clause -->
+            <line x1="560" y1="181" x2="625" y2="225" stroke="#334155" stroke-width="2"/>
+            <line x1="710" y1="181" x2="645" y2="225" stroke="#334155" stroke-width="2"/>
+
+            <!-- Empty Clause -->
+            <rect x="565" y="225" width="140" height="42" rx="8" fill="#15803d" stroke="#065f46" stroke-width="2"/>
+            <text x="635" y="251" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#ffffff">□ Empty Clause</text>
+          </svg>
+          <div class="diagram-caption">Figure 4.5: Resolution Proof by Refutation Flowchart &amp; Resolution Tree</div>
+        </div>
+
+        <div class="q4-sub-heading">2. Step-by-Step Procedure of the Resolution Method (6 Marks)</div>
+        <ol>
+          <li>
+            <strong>Step 1 — Convert Knowledge Base (KB) to Conjunctive Normal Form (CNF):</strong><br/>
+            Transform all given statements in the Knowledge Base into <strong>clause form (CNF)</strong>—a conjunction of clauses where each clause is a disjunction (OR, <code>∨</code>) of literals:
+            <ul>
+              <li>Eliminate implications (replace <code>A → B</code> with <code>¬A ∨ B</code>) and biconditionals.</li>
+              <li>Move negation (<code>¬</code>) inward using De Morgan's laws and quantifier negation rules.</li>
+              <li>Standardize variables apart, eliminate existential quantifiers (<code>∃</code>) via <em>Skolemization</em>, drop universal quantifiers (<code>∀</code>), and distribute <code>∨</code> over <code>∧</code>.</li>
+            </ul>
+          </li>
+          <li>
+            <strong>Step 2 — Add the Negation of the Goal (¬G) to the KB:</strong><br/>
+            Negate the statement/goal <code>G</code> that needs to be proved (forming <code>¬G</code>), convert <code>¬G</code> into CNF clause form, and add it to the set of clauses in the Knowledge Base.
+          </li>
+          <li>
+            <strong>Step 3 — Select Two Clauses and Apply the Resolution Rule (with Unification):</strong><br/>
+            Pick two clauses that contain <strong>complementary literals</strong> (e.g., <code>L</code> in one clause and <code>¬L</code> in another clause; in FOL, unify predicates using Most General Unifier <code>θ</code>). Cancel out the complementary pair and combine the remaining literals to form a new clause called the <strong>Resolvent</strong>:
+            <div class="logic-block">
+              Clause 1: (A <span class="hl-sym">∨</span> <span class="hl-pred">B</span>) &nbsp;&nbsp;,&nbsp;&nbsp; Clause 2: (<span class="hl-pred">¬B</span> <span class="hl-sym">∨</span> C)<br/>
+              ──────────────────────────────────────────<br/>
+              Resolvent: (A <span class="hl-sym">∨</span> C) &nbsp;&nbsp;<span class="hl-comment">// B and ¬B cancel each other out</span>
+            </div>
+          </li>
+          <li>
+            <strong>Step 4 — Add Resolvent &amp; Repeat Until Stopping Condition:</strong><br/>
+            Add the newly generated resolvent clause to the KB and repeat Step 3 until one of two conditions occurs:
+            <ul>
+              <li><strong>Empty Clause (□ / NIL) is derived:</strong> A contradiction is reached (e.g., resolving <code>Q</code> and <code>¬Q</code>). Since adding <code>¬G</code> caused a contradiction, the original goal <strong>G is proved to be TRUE</strong>.</li>
+              <li><strong>No new clauses can be derived:</strong> If the empty clause cannot be produced and no more pairs can be resolved, then the goal <code>G</code> cannot be proved from the given KB.</li>
+            </ul>
+          </li>
+        </ol>
+
+        <!-- Hinglish Explanation -->
+        <div class="hinglish-card">
+          <div class="hinglish-header">💡 Hinglish Mein Samjho (Resolution Method — Proof by Refutation)</div>
+          <p>
+            <strong>Resolution Method kaise kaam karta hai?</strong><br/>
+            Isko <em>"Ulta Maan Kar Galat Sabit Karna" (Proof by Contradiction/Refutation)</em> kehte hain. Maan lo humein prove karna hai ki <code>Q</code> sach hai:
+          </p>
+          <ul>
+            <li><strong>Step 1 (CNF Conversion):</strong> Sabse pehle Knowledge Base ke saare sentences ko simple OR (<code>∨</code>) waale clauses mein convert kar lo (jaise <code>P → Q</code> ban jata hai <code>¬P ∨ Q</code>).</li>
+            <li><strong>Step 2 (Negate the Goal):</strong> Jis Goal ko prove karna hai, uska <strong>ulta (Negation, jaise ¬Q)</strong> maan lo aur usko Knowledge Base mein add kar do.</li>
+            <li><strong>Step 3 (Cancel Opposite Literals):</strong> Ab do-do clauses uthao jinmein opposite terms hon (jaise ek mein <code>P</code> aur doosre mein <code>¬P</code>) aur unhe cancel karke naya clause (Resolvent) banao.</li>
+            <li><strong>Step 4 (Empty Clause □ = Proof Complete!):</strong> Cancel karte-karte jab aakhir mein <code>Q</code> aur <code>¬Q</code> aapas mein kat jayein aur <strong>Empty Clause (□ / kuch nahi bache)</strong> aa jaye, toh iska matlab humara ulta maanna (<code>¬Q</code>) galat tha — yaani <strong>Goal Q 100% TRUE hai!</strong></li>
+          </ul>
+        </div>
+      </article>
+
+    </section>
+
+  </main>
+
+  <!-- JavaScript Logic for Interactive MCQ Quiz -->
+  <script>
+    const mcqData = [
+      // ==================== Q.1: CO-01 (10 Questions) ====================
+      {
+        id: 1,
+        section: "Q.1",
+        qNum: 1,
+        co: "CO-01",
+        bl: "BL1",
+        question: "Who coined the term \"Artificial Intelligence\" at the Dartmouth Conference in 1956?",
+        options: ["Alan Turing", "John McCarthy", "Charles Babbage", "Dennis Ritchie"],
+        correct: 1,
+        expEn: "John McCarthy organized the famous 1956 Dartmouth Summer Research Project and coined the term 'Artificial Intelligence', earning him the title 'Father of AI'.",
+        expHi: "1956 ke Dartmouth Conference mein John McCarthy ne sabse pehle 'Artificial Intelligence' word diya tha, isliye unhe Father of AI kaha jata hai."
+      },
+      {
+        id: 2,
+        section: "Q.1",
+        qNum: 2,
+        co: "CO-01",
+        bl: "BL1",
+        question: "The Turing Test was proposed by",
+        options: ["Alan Turing", "Herbert Simon", "Marvin Minsky", "Noam Chomsky"],
+        correct: 0,
+        expEn: "Alan Turing proposed the Turing Test (originally called the 'Imitation Game') in his 1950 paper 'Computing Machinery and Intelligence' to test if a machine can exhibit human-like intelligence.",
+        expHi: "Alan Turing ne 1950 mein Turing Test propose kiya tha yeh check karne ke liye ki kya machine insaan ki tarah soch aur jawab de sakti hai."
+      },
+      {
+        id: 3,
+        section: "Q.1",
+        qNum: 3,
+        co: "CO-01",
+        bl: "BL1",
+        question: "AI is the science of building machines that perform tasks requiring",
+        options: ["human intelligence", "only calculation", "only storage", "only printing"],
+        correct: 0,
+        expEn: "Artificial Intelligence focuses on creating machines capable of performing complex tasks—such as reasoning, learning, perception, and decision-making—that typically require human intelligence.",
+        expHi: "AI ka main kaam aisi machines banana hai jo woh kaam kar sakein jinke liye 'human intelligence' (dimaag, samajh aur learning) ki zaroorat hoti hai."
+      },
+      {
+        id: 4,
+        section: "Q.1",
+        qNum: 4,
+        co: "CO-01",
+        bl: "BL1",
+        question: "PEAS stands for",
+        options: [
+          "Performance, Environment, Actuators, Sensors",
+          "Planning, Execution, Action, Search",
+          "Process, Event, Agent, System",
+          "Perception, Energy, Action, Speed"
+        ],
+        correct: 0,
+        expEn: "In AI agent design, PEAS stands for Performance measure, Environment, Actuators, and Sensors—the four components that define the task environment of an intelligent agent.",
+        expHi: "AI Agent design mein PEAS ka full form hai: Performance measure, Environment, Actuators, aur Sensors."
+      },
+      {
+        id: 5,
+        section: "Q.1",
+        qNum: 5,
+        co: "CO-01",
+        bl: "BL1",
+        question: "An intelligent agent perceives its environment through",
+        options: ["actuators", "sensors", "memory", "compiler"],
+        correct: 1,
+        expEn: "An intelligent agent receives inputs/percepts from its surrounding environment using Sensors (such as cameras, microphones, or infrared sensors) and acts on the environment using Actuators.",
+        expHi: "Koi bhi intelligent agent apne aas-paas ke environment ko 'Sensors' (jaise camera, mic, dirt sensor) ke through perceive (feel/sense) karta hai."
+      },
+      {
+        id: 6,
+        section: "Q.1",
+        qNum: 6,
+        co: "CO-01",
+        bl: "BL2",
+        question: "Which of the following is an actuator of a vacuum cleaner robot?",
+        options: ["Dirt sensor", "Camera", "Wheels", "Battery level"],
+        correct: 2,
+        expEn: "Actuators are components through which an agent takes physical action in the environment (e.g., wheels, motors, suction pump). Dirt sensors and cameras are sensors, not actuators.",
+        expHi: "Actuator woh part hota hai jisse robot physical action ya movement karta hai. Vacuum cleaner robot mein 'Wheels' actuator hain (jabki Dirt sensor aur Camera sensors hain)."
+      },
+      {
+        id: 7,
+        section: "Q.1",
+        qNum: 7,
+        co: "CO-01",
+        bl: "BL2",
+        question: "A thermostat is an example of a",
+        options: ["simple reflex agent", "learning agent", "utility-based agent", "goal-based agent"],
+        correct: 0,
+        expEn: "A thermostat operates on simple condition-action (IF-THEN) rules based purely on the current temperature percept (e.g., if temp > 25°C, turn on cooling), making it a classic Simple Reflex Agent.",
+        expHi: "Thermostat sirf current temperature dekh kar IF-THEN rule lagata hai (jaise garmi badhi toh AC on, thand hui toh off). Yeh 'Simple Reflex Agent' ka best example hai."
+      },
+      {
+        id: 8,
+        section: "Q.1",
+        qNum: 8,
+        co: "CO-01",
+        bl: "BL2",
+        question: "A chess game where the full board is visible is an example of a ______ environment.",
+        options: ["fully observable", "partially observable", "continuous", "multi-agent only"],
+        correct: 0,
+        expEn: "When an agent's sensors give it access to the complete state of the environment at every point in time (like seeing all 64 squares and pieces on a chessboard), the environment is Fully Observable.",
+        expHi: "Jab poora chess board aur saare mohre (pieces) dono players ko saaf dikhte hain, toh aise environment ko 'Fully Observable' environment kehte hain."
+      },
+      {
+        id: 9,
+        section: "Q.1",
+        qNum: 9,
+        co: "CO-01",
+        bl: "BL2",
+        question: "A rational agent always selects the action that",
+        options: [
+          "maximises its performance measure",
+          "is easiest to code",
+          "uses least memory",
+          "is chosen randomly"
+        ],
+        correct: 0,
+        expEn: "By definition, a rational agent selects an action expected to maximize its performance measure, given the evidence provided by the percept sequence and its built-in knowledge.",
+        expHi: "Rational agent hamesha woh action choose karta hai jisse uska 'Performance Measure' (score/output) maximum ho sake."
+      },
+      {
+        id: 10,
+        section: "Q.1",
+        qNum: 10,
+        co: "CO-01",
+        bl: "BL1",
+        question: "In 1997, the chess computer Deep Blue defeated the world champion",
+        options: ["Magnus Carlsen", "Garry Kasparov", "Viswanathan Anand", "Bobby Fischer"],
+        correct: 1,
+        expEn: "In May 1997, IBM's supercomputer Deep Blue defeated reigning World Chess Champion Garry Kasparov in a six-game match—a historic milestone in AI.",
+        expHi: "1997 mein IBM ke chess computer 'Deep Blue' ne us waqt ke World Chess Champion 'Garry Kasparov' ko haraya tha."
+      },
+
+      // ==================== Q.2: CO-02 (10 Questions) ====================
+      {
+        id: 11,
+        section: "Q.2",
+        qNum: 1,
+        co: "CO-02",
+        bl: "BL1",
+        question: "Breadth-First Search (BFS) uses which data structure for its frontier?",
+        options: ["Stack", "Queue (FIFO)", "Tree only", "Array only"],
+        correct: 1,
+        expEn: "Breadth-First Search (BFS) expands the shallowest unexpanded nodes first, which is implemented using a First-In-First-Out (FIFO) Queue data structure.",
+        expHi: "BFS level-by-level search karta hai, isliye jo node pehle aati hai woh pehle expand hoti hai — ismein 'Queue (FIFO - First In First Out)' data structure use hota hai."
+      },
+      {
+        id: 12,
+        section: "Q.2",
+        qNum: 2,
+        co: "CO-02",
+        bl: "BL1",
+        question: "In A* search, the evaluation function is",
+        options: ["f(n) = g(n) + h(n)", "f(n) = g(n) − h(n)", "f(n) = h(n) only", "f(n) = g(n) × h(n)"],
+        correct: 0,
+        expEn: "A* search evaluates nodes by combining g(n) (the actual path cost from the start node to node n) and h(n) (the estimated heuristic cost from n to the goal): f(n) = g(n) + h(n).",
+        expHi: "A* search ka formula f(n) = g(n) + h(n) hota hai, jahan g(n) start se n tak ka actual cost hai aur h(n) n se goal tak ka estimated cost hai."
+      },
+      {
+        id: 13,
+        section: "Q.2",
+        qNum: 3,
+        co: "CO-02",
+        bl: "BL2",
+        question: "In A* search, g(n) represents",
+        options: [
+          "the estimated cost from n to the goal",
+          "the actual cost from the start to n",
+          "the number of goals",
+          "the depth of the tree only"
+        ],
+        correct: 1,
+        expEn: "In A* search, g(n) gives the exact/actual path cost incurred so far to reach node n from the initial start state.",
+        expHi: "A* search mein g(n) batata hai ki Starting node se current node 'n' tak pahunchne mein ab tak kitna 'actual cost' laga hai."
+      },
+      {
+        id: 14,
+        section: "Q.2",
+        qNum: 4,
+        co: "CO-02",
+        bl: "BL2",
+        question: "In A* search, h(n) represents",
+        options: [
+          "the heuristic (estimated) cost from n to the goal",
+          "the cost already spent",
+          "the number of nodes",
+          "the branching factor"
+        ],
+        correct: 0,
+        expEn: "In A* search, h(n) is the heuristic function that estimates the cost of the cheapest path from the current node n to the goal node.",
+        expHi: "A* search mein h(n) ek heuristic function hai jo current node 'n' se Goal tak ka 'estimated (andaza) cost' batata hai."
+      },
+      {
+        id: 15,
+        section: "Q.2",
+        qNum: 5,
+        co: "CO-02",
+        bl: "BL2",
+        question: "A heuristic is called admissible if it",
+        options: [
+          "never overestimates the true cost to the goal",
+          "always overestimates the cost",
+          "is always zero",
+          "is always negative"
+        ],
+        correct: 0,
+        expEn: "A heuristic h(n) is admissible if 0 ≤ h(n) ≤ h*(n) for every node n, meaning it never overestimates the true minimum cost h*(n) to reach the goal. This guarantees optimality in A*.",
+        expHi: "Admissible heuristic woh hota hai jo Goal tak pahunchne ke asli cost se kabhi zyada estimate nahi karta (never overestimates: h(n) ≤ true cost)."
+      },
+      {
+        id: 16,
+        section: "Q.2",
+        qNum: 6,
+        co: "CO-02",
+        bl: "BL1",
+        question: "In the 8-puzzle, the heuristic h1 counts the",
+        options: [
+          "number of misplaced tiles",
+          "number of moves made",
+          "number of empty squares",
+          "number of rows"
+        ],
+        correct: 0,
+        expEn: "In the standard 8-puzzle formulation (Russell & Norvig), h1 is the number of misplaced tiles (excluding the blank space), while h2 is the sum of Manhattan distances of the tiles from their goal positions.",
+        expHi: "8-puzzle problem mein heuristic h1 count karta hai ki kitni tiles apni sahi (goal) jagah par nahi hain ('number of misplaced tiles')."
+      },
+      {
+        id: 17,
+        section: "Q.2",
+        qNum: 7,
+        co: "CO-02",
+        bl: "BL1",
+        question: "A Constraint Satisfaction Problem (CSP) consists of",
+        options: [
+          "variables, domains and constraints",
+          "only variables",
+          "only constraints",
+          "nodes and edges only"
+        ],
+        correct: 0,
+        expEn: "A Constraint Satisfaction Problem (CSP) is formally defined by three components (X, D, C): a set of Variables (X), a set of Domains (D) of possible values for each variable, and a set of Constraints (C) specifying allowable combinations.",
+        expHi: "Har CSP (Constraint Satisfaction Problem) 3 cheezon se milkar banti hai: Variables (X), Domains (D), aur Constraints (C)."
+      },
+      {
+        id: 18,
+        section: "Q.2",
+        qNum: 8,
+        co: "CO-02",
+        bl: "BL1",
+        question: "In the Minimax algorithm, the MAX player tries to",
+        options: [
+          "maximise the utility value",
+          "minimise the utility value",
+          "skip the move",
+          "avoid all moves"
+        ],
+        correct: 0,
+        expEn: "In two-player adversarial games using Minimax, the MAX player always selects the move that leads to the state with the maximum possible utility value, while MIN tries to minimize it.",
+        expHi: "Minimax game tree mein MAX player hamesha apna score/fayda badhane ('maximise the utility value') ki koshish karta hai, jabki MIN player use kam karta hai."
+      },
+      {
+        id: 19,
+        section: "Q.2",
+        qNum: 9,
+        co: "CO-02",
+        bl: "BL2",
+        question: "Alpha-Beta pruning is used to",
+        options: [
+          "reduce the number of nodes evaluated in Minimax",
+          "increase the search tree size",
+          "sort the nodes",
+          "store the game history"
+        ],
+        correct: 0,
+        expEn: "Alpha-Beta pruning is an optimization technique for the Minimax algorithm that prunes (cuts off) branches of the game tree that cannot possibly influence the final decision, drastically reducing the number of nodes evaluated.",
+        expHi: "Alpha-Beta pruning Minimax tree ki un bekar branches ko kaat (prune kar) deta hai jinhe check karne se final answer par koi farq nahi padega — isse evaluate hone waale nodes kam ho jate hain."
+      },
+      {
+        id: 20,
+        section: "Q.2",
+        qNum: 10,
+        co: "CO-02",
+        bl: "BL1",
+        question: "Which search always expands the node with the lowest path cost g(n)?",
+        options: [
+          "Depth-First Search",
+          "Uniform Cost Search",
+          "Depth-Limited Search",
+          "Hill Climbing"
+        ],
+        correct: 1,
+        expEn: "Uniform Cost Search (UCS) orders its priority queue frontier by path cost g(n) and always expands the node with the lowest cumulative path cost g(n).",
+        expHi: "Uniform Cost Search (UCS) hamesha priority queue use karke us node ko sabse pehle expand karta hai jiska path cost g(n) sabse kam (lowest) hota hai."
+      },
+
+      // ==================== Q.3: CO-03 (10 Questions) ====================
+      {
+        id: 21,
+        section: "Q.3",
+        qNum: 1,
+        co: "CO-03",
+        bl: "BL1",
+        question: "\"Snow is white\" is an example of ______ knowledge.",
+        options: ["procedural", "declarative", "meta", "none of these"],
+        correct: 1,
+        expEn: "'Snow is white' states a static fact/assertion about the world (knowing 'what' is true), which is the definition of Declarative Knowledge.",
+        expHi: "'Snow is white' ek simple fact ya statement hai ('Kya sach hai'), isliye yeh Declarative Knowledge ka example hai."
+      },
+      {
+        id: 22,
+        section: "Q.3",
+        qNum: 2,
+        co: "CO-03",
+        bl: "BL1",
+        question: "Knowledge about \"how to do a task\" (like a sorting algorithm) is called ______ knowledge.",
+        options: ["declarative", "structural", "procedural", "factual"],
+        correct: 2,
+        expEn: "Procedural knowledge encodes step-by-step instructions, skills, or algorithms describing 'how to accomplish a specific task'.",
+        expHi: "Kisi kaam ko 'kaise karna hai' (step-by-step process ya sorting algorithm) batane waali knowledge ko Procedural Knowledge kehte hain."
+      },
+      {
+        id: 23,
+        section: "Q.3",
+        qNum: 3,
+        co: "CO-03",
+        bl: "BL1",
+        question: "The symbol ∀ in First-Order Logic means",
+        options: ["there exists", "for all", "not", "implies"],
+        correct: 1,
+        expEn: "In First-Order Logic, the upside-down A symbol (∀) is the Universal Quantifier, read as 'for all', 'for every', or 'for each'.",
+        expHi: "First-Order Logic mein उल्टा A (∀) Universal Quantifier hota hai, jiska matlab 'for all' (sabhi ke liye) hota hai."
+      },
+      {
+        id: 24,
+        section: "Q.3",
+        qNum: 4,
+        co: "CO-03",
+        bl: "BL1",
+        question: "The symbol ∃ in First-Order Logic means",
+        options: ["for all", "there exists", "and", "or"],
+        correct: 1,
+        expEn: "In First-Order Logic, the backward E symbol (∃) is the Existential Quantifier, read as 'there exists' or 'for some'.",
+        expHi: "First-Order Logic mein उल्टा E (∃) Existential Quantifier hota hai, jiska matlab 'there exists' (kam se kam ek exist karta hai) hota hai."
+      },
+      {
+        id: 25,
+        section: "Q.3",
+        qNum: 5,
+        co: "CO-03",
+        bl: "BL1",
+        question: "Which logic uses variables and quantifiers?",
+        options: ["Propositional logic", "First-Order Logic", "Boolean algebra", "Fuzzy sets"],
+        correct: 1,
+        expEn: "First-Order Logic (Predicate Logic) uses variables (x, y), predicates, functions, and quantifiers (∀, ∃), whereas Propositional Logic only deals with whole atomic propositions (P, Q).",
+        expHi: "Variables (x, y) aur Quantifiers (∀, ∃) ka use 'First-Order Logic' (FOL) mein hota hai. Propositional logic mein sirf simple statements (P, Q) hote hain."
+      },
+      {
+        id: 26,
+        section: "Q.3",
+        qNum: 6,
+        co: "CO-03",
+        bl: "BL2",
+        question: "In the resolution method, to prove a goal we first add the ______ of the goal to the knowledge base.",
+        options: ["copy", "negation", "answer", "weight"],
+        correct: 1,
+        expEn: "Resolution works by Proof by Refutation (contradiction): to prove a goal G, we first add the negation of the goal (¬G) to the Knowledge Base and derive a contradiction.",
+        expHi: "Resolution method (Proof by Refutation) mein kisi Goal ko prove karne ke liye sabse pehle us Goal ka 'negation' (ulta, ¬G) Knowledge Base mein add kiya jata hai."
+      },
+      {
+        id: 27,
+        section: "Q.3",
+        qNum: 7,
+        co: "CO-03",
+        bl: "BL2",
+        question: "Resolution proof is complete when we derive the",
+        options: ["empty clause", "first clause", "longest clause", "all facts"],
+        correct: 0,
+        expEn: "When two unit clauses with complementary literals (such as Q and ¬Q) resolve, they cancel out completely to produce the Empty Clause (□ / NIL), signifying a contradiction and completing the proof.",
+        expHi: "Jab resolution karte hue opposite literals (jaise Q aur ¬Q) kat jate hain aur 'empty clause' (□ / NIL) mil jata hai, tab contradiction prove ho jata hai aur proof complete ho jata hai."
+      },
+      {
+        id: 28,
+        section: "Q.3",
+        qNum: 8,
+        co: "CO-03",
+        bl: "BL2",
+        question: "From P and P → Q, Modus Ponens infers",
+        options: ["Q", "¬P", "P ∧ ¬Q", "¬Q"],
+        correct: 0,
+        expEn: "Modus Ponens (Rule of Detachment) states that if conditional statement 'P → Q' (If P then Q) is true, and antecedent 'P' is true, then consequent 'Q' is inferred to be true.",
+        expHi: "Modus Ponens rule kehta hai: Agar 'P' sach hai, aur 'P → Q' (Agar P toh Q) bhi sach hai, toh isse seedha 'Q' infer (prove) hota hai."
+      },
+      {
+        id: 29,
+        section: "Q.3",
+        qNum: 9,
+        co: "CO-03",
+        bl: "BL2",
+        question: "Forward chaining starts from the",
+        options: ["known facts", "goal", "empty set", "last rule only"],
+        correct: 0,
+        expEn: "Forward chaining is a data-driven reasoning method that begins with the 'known facts' in the Knowledge Base and applies inference rules forward to extract more data until the goal is reached.",
+        expHi: "Forward chaining ek data-driven approach hai jo hamesha 'known facts' se start hoti hai aur rules apply karte hue Goal tak jati hai."
+      },
+      {
+        id: 30,
+        section: "Q.3",
+        qNum: 10,
+        co: "CO-03",
+        bl: "BL2",
+        question: "In a semantic network, \"Dog ISA Mammal\" represents a",
+        options: [
+          "class hierarchy (inheritance) relationship",
+          "loop",
+          "random value",
+          "function call"
+        ],
+        correct: 0,
+        expEn: "In a semantic network, an 'ISA' link connects a subclass (Dog) to its superclass (Mammal), representing a class hierarchy (inheritance) relationship so Dog inherits properties of Mammal.",
+        expHi: "Semantic network mein 'Dog ISA Mammal' ek 'class hierarchy (inheritance) relationship' dikhata hai, jisse Dog ko Mammal ki saari properties inherit ho jati hain."
+      }
+    ];
+
+    let currentFilter = "ALL";
+    let userAnswers = {};
+    let showAllMode = false;
+    const letters = ["A", "B", "C", "D"];
+
+    function renderMCQs() {
+      const container = document.getElementById("mcq-container");
+      container.innerHTML = "";
+
+      const filtered = currentFilter === "ALL"
+        ? mcqData
+        : mcqData.filter(q => q.co === currentFilter);
+
+      filtered.forEach(item => {
+        const answeredChoice = userAnswers[item.id];
+        const isAnswered = answeredChoice !== undefined;
+        const isCorrect = isAnswered && answeredChoice === item.correct;
+
+        const card = document.createElement("div");
+        card.className = "mcq-card";
+        if (isAnswered) {
+          card.classList.add(isCorrect ? "answered-correct" : "answered-wrong");
+        } else if (showAllMode) {
+          card.classList.add("answered-correct");
+        }
+
+        let optionsHtml = "";
+        item.options.forEach((optText, idx) => {
+          let btnClass = "option-btn";
+          if (isAnswered) {
+            if (idx === item.correct) btnClass += " correct";
+            else if (idx === answeredChoice) btnClass += " wrong";
+          } else if (showAllMode && idx === item.correct) {
+            btnClass += " correct";
+          }
+
+          optionsHtml += `
+            <button class="${btnClass}" onclick="selectOption(${item.id}, ${idx})">
+              <span class="opt-letter">${letters[idx]}</span>
+              <span>${optText}</span>
+            </button>
+          `;
+        });
+
+        const showExp = isAnswered || showAllMode;
+        const statusLabel = isAnswered
+          ? (isCorrect ? "✅ Correct Answer!" : `❌ Incorrect — Correct Option is ${letters[item.correct]}`)
+          : `📌 Correct Answer: Option ${letters[item.correct]} (${item.options[item.correct]})`;
+
+        card.innerHTML = `
+          <div class="mcq-header">
+            <div class="badge-group">
+              <span class="badge badge-co">${item.section} (${item.qNum}) • ${item.co}</span>
+              <span class="badge badge-bl">Bloom's: ${item.bl}</span>
+              <span class="badge badge-mark">1 Mark</span>
+            </div>
+          </div>
+          <div class="mcq-question">${item.section}.${item.qNum}. ${item.question}</div>
+          <div class="options-grid">
+            ${optionsHtml}
+          </div>
+          <div class="explanation-box ${showExp ? 'visible' : ''}">
+            <div class="exp-title">${statusLabel}</div>
+            <div class="exp-en"><strong>English Explanation:</strong> ${item.expEn}</div>
+            <div class="exp-hinglish"><strong>💡 Hinglish Explanation:</strong> ${item.expHi}</div>
+          </div>
+        `;
+
+        container.appendChild(card);
+      });
+
+      updateScoreboard();
+    }
+
+    function selectOption(questionId, optionIdx) {
+      userAnswers[questionId] = optionIdx;
+      renderMCQs();
+    }
+
+    function filterMCQs(co, btnElement) {
+      currentFilter = co;
+      document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+      btnElement.classList.add("active");
+      renderMCQs();
+    }
+
+    function toggleAllAnswers() {
+      showAllMode = !showAllMode;
+      const btn = document.getElementById("toggle-all-exp-btn");
+      btn.innerHTML = showAllMode
+        ? "🙈 Hide Unanswered Explanations"
+        : "👁️ Show All Answers & Explanations";
+      renderMCQs();
+    }
+
+    function resetQuiz() {
+      userAnswers = {};
+      showAllMode = false;
+      const btn = document.getElementById("toggle-all-exp-btn");
+      btn.innerHTML = "👁️ Show All Answers & Explanations";
+      renderMCQs();
+    }
+
+    function updateScoreboard() {
+      const total = mcqData.length;
+      const attemptedIds = Object.keys(userAnswers);
+      const attempted = attemptedIds.length;
+      let correct = 0;
+
+      attemptedIds.forEach(idStr => {
+        const qId = parseInt(idStr, 10);
+        const qObj = mcqData.find(x => x.id === qId);
+        if (qObj && userAnswers[qId] === qObj.correct) {
+          correct++;
+        }
+      });
+
+      const accuracy = attempted > 0 ? Math.round((correct / attempted) * 100) : 0;
+      const progressPct = Math.round((attempted / total) * 100);
+
+      document.getElementById("stat-total").textContent = total;
+      document.getElementById("stat-attempted").textContent = `${attempted} / ${total}`;
+      document.getElementById("stat-correct").textContent = `${correct} / ${attempted}`;
+      document.getElementById("stat-accuracy").textContent = `${accuracy}%`;
+      document.getElementById("quiz-progress").style.width = `${progressPct}%`;
+    }
+
+    function switchTab(viewId, btnEl) {
+      document.querySelectorAll(".section-view").forEach(s => s.classList.remove("active"));
+      document.getElementById(viewId).classList.add("active");
+
+      document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+      btnEl.classList.add("active");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    // Initialize on load
+    renderMCQs();
+  </script>
+</body>
+</html>

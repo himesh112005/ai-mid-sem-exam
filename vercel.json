@@ -1,0 +1,9 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "cleanUrls": true,
+  "rewrites": [
+    { "source": "/", "destination": "/index.html" },
+    { "source": "/ai_mse_quiz_and_solutions", "destination": "/index.html" },
+    { "source": "/ai_mse_quiz_and_solutions.html", "destination": "/index.html" }
+  ]
+}
